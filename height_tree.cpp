@@ -32,7 +32,20 @@ int height(Node* root) {
 
 
 }
+static int ans = 0;
 
+int heights(Node* root) {
+    if(root == NULL) {
+        return 0;
+    }
+    int leftht = heights(root->left);
+    int rightht = heights(root->right);
+    ans = max(leftht+rightht, ans); // this is for calculating diameter as well in O(n) time complexity
+    return max(leftht, rightht)+1;
+   
+}
+
+// time complexity :- O(n^2)
 int diameter(Node* root)  {
     if(root == NULL) {
         return 0;
@@ -49,5 +62,7 @@ int main() {
     Node* root = builttree(arr);
     cout << height(root) << endl;
     cout << diameter(root) << endl;
+    heights(root);
+    cout << ans << endl;
 
 }
