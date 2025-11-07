@@ -33,10 +33,21 @@ int height(Node* root) {
 
 }
 
+int diameter(Node* root)  {
+    if(root == NULL) {
+        return 0;
+    }
+    int left = diameter(root->left);
+    int right = diameter(root->right);
+    int curr = height(root->left) + height(root->right);
+    return max(curr,max(left, right));
+}
+
 
 int main() {
     vector<int> arr= {1,2,-1,-1,3,4,-1,-1,5,-1,-1};
     Node* root = builttree(arr);
     cout << height(root) << endl;
+    cout << diameter(root) << endl;
 
 }
